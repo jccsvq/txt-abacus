@@ -1,5 +1,5 @@
 # txt-abacus
-Creates a text model of a traditional 2:5 abacus with 13 rods.
+Creates a text model of a traditional 2:5 abacus (soroban/suanpan) with 13 rods.
 
 A very simple Python 3 module for drawing/writing a diagram of a 2:5 abacus with 13 rods with capacity for the suspended bead (Xuán zhū 懸珠) that may be included into a document using a **`monospaced font`**. Defines the main function `sw_print` that does the job.
 ```python
