@@ -3,9 +3,11 @@
 Module txtabacus
 --------------
 
-Creates a txt model of a traditional 2:5 abacus with 13 rods.
+Creates a txt model of a 1:4, 1:5, 2:5 or 3:5 abacus with 13 rods.
 
 Created on Sat Mar 23 17:57:02 2019
+
+Modified on Sun May 2 2021
 
 :author: jccsvq
 
@@ -124,7 +126,7 @@ def tenchi_split(list1):
 
 
 
-def sw_print(str1, left=True):
+def sw_print(str1, left=True, atype='2:5'):
     """
     Draws the abacus as ascii art
 
@@ -134,6 +136,8 @@ def sw_print(str1, left=True):
     :type str1: str
     :param left: ``True`` if leftpad is required, ``False`` for rightpad
     :type left: bool
+    :param atype: '1:4', '1:5', '2:5', '3:5'
+    :type atype: str
     :returns: ``None``
 
     :example:
@@ -164,8 +168,27 @@ def sw_print(str1, left=True):
     le2 = '╠═════════════════════════════════════════╣'
     le3 = '╚═════════════════════════════════════════╝'
 
-    tcod = ['●●││', '●││●', '││●●', '│●│●']
-    ccod = ['││●●●●●', '●││●●●●', '●●││●●●', '●●●││●●', '●●●●││●', '●●●●●││']
+    if atype == '1:4':
+        tcod = ['○│', '│●']
+        ccod = ['│○○○○', '●│○○○', '●●│○○', '●●●│○', '●●●●│']
+        nur = 2
+        nlr = 5
+    elif atype == '3:5' :
+        tcod = ['○○○│', '○○│●', '○│●●', '│●●●']
+        ccod = ['││○○○○○', '●││○○○○', '●●││○○○', '●●●││○○', '●●●●││○', '●●●●●││']
+        nur = 4
+        nlr = 7
+    elif atype == '1:5' :
+        tcod = ['○│', '│●']
+        ccod = ['│○○○○○', '●│○○○○', '●●│○○○', '●●●│○○', '●●●●│○', '●●●●●│']
+        nur = 2
+        nlr = 6
+   
+    else :
+        tcod = ['○○││', '○││●', '││●●', '│●│●']
+        ccod = ['││○○○○○', '●││○○○○', '●●││○○○', '●●●││○○', '●●●●││○', '●●●●●││']
+        nur = 4
+        nlr = 7
     if left:
         ten, chi, name = tenchi_split(leftpad(str1))
     else:
@@ -176,14 +199,14 @@ def sw_print(str1, left=True):
         values = values + '{:3d}'.format(5 * ten[i] + chi[i])
     print(values)
     print(le1)
-    for i in range(4):
+    for i in range(nur):
         line = l0[0:2] + ' '
         for j in range(nr):
             line = line + tcod[ten[j]][i] + '  '
         line = line + l0[0]
         print(line)
     print(le2)
-    for i in range(7):
+    for i in range(nlr):
         line = l0[0:2] + ' '
         for j in range(nr):
             line = line + ccod[chi[j]][i] + '  '
@@ -200,4 +223,8 @@ if __name__ == "__main__":
 
     sw_print('0 1 2 3 4 5 10 11 12 13 14 15 20')
     sw_print('21 22 23 24 25 30 31 32 33 34 35')
+    sw_print('21 22 23 24 25 30 31 32 33 34 35', atype = '3:5')
     sw_print('1 2 3', False)
+    sw_print('0 1 2 3 4 10 11 12 13 14 ', atype = '1:4')
+    sw_print('0 1 2 3 4 5 10 11 12 13 14 15', atype = '1:5')
+
