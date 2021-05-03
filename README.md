@@ -3,7 +3,7 @@ Creates a text model of a traditional 2:5 abacus (soroban/suanpan) with 13 rods.
 
 A very simple Python 3 module for drawing/writing a diagram of a 2:5 abacus with 13 rods with capacity for the suspended bead (Kenshu, Xuánzhū 懸珠) that may be included into a document using a **`monospaced font`**. Defines the function `sw_print` that does the job.
 
-As of May 2021 it can also draw 1:4, 1:5 and 3:5 abacuses.
+As of May 2021 it can also draw 1:4, 1:5 and 3:5 abacuses. Also 1.5 with suspended lower beads.
 
 ```python
 sw_print(str1, left=True)

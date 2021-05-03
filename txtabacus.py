@@ -175,14 +175,19 @@ def sw_print(str1, left=True, atype='2:5'):
         nlr = 5
     elif atype == '3:5' :
         tcod = ['○○○│', '○○│●', '○│●●', '│●●●']
-        ccod = ['││○○○○○', '●││○○○○', '●●││○○○', '●●●││○○', '●●●●││○', '●●●●●││']
+        ccod = ['│○○○○○', '●│○○○○', '●●│○○○', '●●●│○○', '●●●●│○', '●●●●●│']
         nur = 4
-        nlr = 7
+        nlr = 6
     elif atype == '1:5' :
         tcod = ['○│', '│●']
         ccod = ['│○○○○○', '●│○○○○', '●●│○○○', '●●●│○○', '●●●●│○', '●●●●●│']
         nur = 2
         nlr = 6
+    elif atype == '1:5s' :
+        tcod = ['○│', '│●']
+        ccod = ['││○○○○○', '●││○○○○', '●●││○○○', '●●●││○○', '●●●●││○', '●●●●●││', '●│●│○○○', '●●│●│○○', '●●●│●│○', '●●●●│●│']
+        nur = 2
+        nlr = 7
    
     else :
         tcod = ['○○││', '○││●', '││●●', '│●│●']
@@ -195,8 +200,9 @@ def sw_print(str1, left=True, atype='2:5'):
         ten, chi, name = tenchi_split(rightpad(str1))
 
     values = ' '
+    diglist = [0,1,2,3,4,5,1,2,3,4]
     for i in range(nr):
-        values = values + '{:3d}'.format(5 * ten[i] + chi[i])
+        values = values + '{:3d}'.format(5 * ten[i] + diglist[chi[i]])
     print(values)
     print(le1)
     for i in range(nur):
@@ -227,4 +233,5 @@ if __name__ == "__main__":
     sw_print('1 2 3', False)
     sw_print('0 1 2 3 4 10 11 12 13 14 ', atype = '1:4')
     sw_print('0 1 2 3 4 5 10 11 12 13 14 15', atype = '1:5')
+    sw_print('0 6 7 8 9 5 16 17 18 19 14 15', atype = '1:5s')
 
