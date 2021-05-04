@@ -1,18 +1,28 @@
 # txt-abacus
-Creates a text model of a traditional 2:5 abacus (soroban/suanpan) with 13 rods.
+Create traditional Chinese/Japanese abacus (soroban/suanpan) text figures.
 
-A very simple Python 3 module for drawing/writing a diagram of a 2:5 abacus with 13 rods with capacity for the suspended bead (Kenshu, Xuánzhū 懸珠) that may be included into a document using a **`monospaced font`**. Defines the function `sw_print` that does the job.
-
-As of May 2021 it can also draw 1:4, 1:5 and 3:5 abacuses. Also 1.5 with suspended lower beads.
+A very simple Python 3 module to draw/write diagrams of Chinese/Japanese 
+abacus of 1:4, 1:5, 2:5 and 3:5 types with a maximum of 26 rods with 
+capacity for the upper suspended bead (Kenshu, Xuánzhū 懸珠) in 2:5 mode
+ and lower suspended bead in 1:5 mode. These text based figures can be 
+ included in a document using a monospaced font. 
+ 
+ Defines the sw_print function that does the job.
 
 ```python
-sw_print(str1, left=True)
+sw_print(str1, nr=13, left=True, atype='2:5', lrb=True)
 ```
 ```
     :param str1: list of raw codes
     :type str1: str
+    :param nr: number of columns (max 36)
+    :type nr: int
     :param left: ``True`` if leftpad is required, ``False`` for rightpad
     :type left: bool
+    :param atype: '1:4', '1:5', '2:5', '3:5'
+    :type atype: str
+    :param lrb: ``True`` to draw left and right borders
+    :type lrb: bool
     :returns: ``None``
 
     :example:

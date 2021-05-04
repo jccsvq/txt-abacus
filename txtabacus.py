@@ -118,7 +118,7 @@ def tenchi_split(list1):
 
 
 
-def sw_print(str1, nr=13, left=True, atype='2:5'):
+def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
     """
     Draws the abacus as ascii art
 
@@ -126,12 +126,14 @@ def sw_print(str1, nr=13, left=True, atype='2:5'):
 
     :param str1: list of raw codes
     :type str1: str
-    :param nr: number of columns
+    :param nr: number of columns (max 26)
     :type nr: int
     :param left: ``True`` if leftpad is required, ``False`` for rightpad
     :type left: bool
     :param atype: '1:4', '1:5', '2:5', '3:5'
     :type atype: str
+    :param lrb: ``True`` to draw left and right borders
+    :type lrb: bool
     :returns: ``None``
 
     :example:
@@ -195,53 +197,94 @@ def sw_print(str1, nr=13, left=True, atype='2:5'):
     else:
         ten, chi, name = tenchi_split(rightpad(str1, nr))
 
-    values = ' '
+    if lrb:
+        values = ' '
+    else :
+        values = ''
     diglist = [0,1,2,3,4,5,1,2,3,4]
     for i in range(nr):
         values = values + '{:3d}'.format(5 * ten[i] + diglist[chi[i]])
     print(values)
-    line = '╔═'
+    if lrb:
+        line = '╔═'
+    else :
+	    line = '═'
     for i in range(nr):
         line = line + '═══'
-    line = line + '═╗'
+    if lrb:
+        line = line + '═╗'
+    else :
+	    line = line + '═'
     print(line)
     for i in range(nur):
-        line = l0[0:2] + ' '
+        if lrb:
+            line = l0[0:2] + ' '
+        else :
+            line = l0[1:2] + ' '
         for j in range(nr):
             line = line + tcod[ten[j]][i] + '  '
-        line = line + l0[0]
+        if lrb:
+            line = line + l0[0]
         print(line)
-    line = '╠═'
+    if lrb:
+        line = '╠═'
+    else :
+	    line = '═'
     for i in range(nr):
         line = line + '═══'
-    line = line + '═╣'
+    if lrb:
+        line = line + '═╣'
+    else :
+	    line = line + '═'
     print(line)
     for i in range(nlr):
-        line = l0[0:2] + ' '
+        if lrb:
+            line = l0[0:2] + ' '
+        else :
+            line = l0[1:2] + ' '
         for j in range(nr):
             line = line + ccod[chi[j]][i] + '  '
-        line = line + l0[0]
+        if lrb:
+            line = line + l0[0]
         print(line)
-    line = '╚═'
+    if lrb:
+        line = '╚═'
+    else :
+	    line = '═'
     for i in range(nr):
         line = line + '═══'
-    line = line + '═╝'
+    if lrb:
+        line = line + '═╝'
+    else :
+	    line = line + '═'
     print(line)
-    print(l1[0:3*nr+1])
+    if lrb:
+        print(l1[0:3*nr+1])
+    else :
+        print(l1[1:3*nr+1])
 
 
 if __name__ == "__main__":
 
     """
-    Tests
+    Tests:
     """
 
     sw_print('0 1 2 3 4 5 10 11 12 13 14 15 20')
+    print(' ')
     sw_print('21 22 23 24 25 30 31 32 33 34 35')
+    print(' ')
     sw_print('21 22 23 24 25 30 31 32 33 34 35', atype = '3:5')
+    print(' ')
     sw_print('1 2 3', left = False)
+    print(' ')
     sw_print('1 2 3', nr=16, left = False)
+    print(' ')
     sw_print('1 2 3 4 10 11 12 13 14 ', nr=9, atype = '1:4')
+    print(' ')
     sw_print('0 1 2 3 4 5 10 11 12 13 14 15', atype = '1:5')
+    print(' ')
     sw_print('0 6 7 8 9 5 16 17 18 19 14 15', nr=17, atype = '1:5s')
+    print(' ')
+    sw_print('1 2 3 4 10 11 12 13 14 ', nr=9, atype = '1:4', lrb=False)
 
