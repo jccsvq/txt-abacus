@@ -118,7 +118,7 @@ def tenchi_split(list1):
 
 
 
-def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
+def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True, color='bw'):
     """
     Draws the abacus as ascii art
 
@@ -134,6 +134,11 @@ def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
     :type atype: str
     :param lrb: ``True`` to draw left and right borders
     :type lrb: bool
+    :param color: 'bw' set beads: black, unset beads: white (default)
+                  'bb' set beads: black, unset beads: black
+                  'wb' set beads: white, unset beads: black
+                  'ww' set beads: white, unset beads: white
+    :type color: str
     :returns: ``None``
 
     :example:
@@ -192,6 +197,7 @@ def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
          '●●●●●││']
         nur = 4
         nlr = 7
+        
     if left:
         ten, chi, name = tenchi_split(leftpad(str1, nr))
     else:
@@ -225,6 +231,14 @@ def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
             line = line + tcod[ten[j]][i] + '  '
         if lrb:
             line = line + l0[0]
+        if color == 'bb':
+            line = line.replace('○','●')
+        if color == 'ww':
+            line = line.replace('●','○')
+        if color == 'wb':
+            line = line.replace('●','k')
+            line = line.replace('○','●')
+            line = line.replace('k','○')
         print(line)
     if lrb:
         line = '╠═'
@@ -246,6 +260,14 @@ def sw_print(str1, nr=13, left=True, atype='2:5', lrb=True):
             line = line + ccod[chi[j]][i] + '  '
         if lrb:
             line = line + l0[0]
+        if color == 'bb':
+            line = line.replace('○','●')
+        if color == 'ww':
+            line = line.replace('●','○')
+        if color == 'wb':
+            line = line.replace('●','k')
+            line = line.replace('○','●')
+            line = line.replace('k','○')
         print(line)
     if lrb:
         line = '╚═'
@@ -268,15 +290,17 @@ if __name__ == "__main__":
 
     """
     Tests:
+    
+        See test-output.txt and try it in your word processor
     """
 
-    sw_print('0 1 2 3 4 5 10 11 12 13 14 15 20')
+    sw_print('0 1 2 3 4 5 10 11 12 13 14 15 20', color='bb')
     print(' ')
     sw_print('21 22 23 24 25 30 31 32 33 34 35')
     print(' ')
     sw_print('21 22 23 24 25 30 31 32 33 34 35', atype = '3:5')
     print(' ')
-    sw_print('1 2 3', left = False)
+    sw_print('1 2 3', left = False, color='wb')
     print(' ')
     sw_print('1 2 3', nr=16, left = False)
     print(' ')
@@ -286,5 +310,6 @@ if __name__ == "__main__":
     print(' ')
     sw_print('0 6 7 8 9 5 16 17 18 19 14 15', nr=17, atype = '1:5s')
     print(' ')
-    sw_print('1 2 3 4 10 11 12 13 14 ', nr=9, atype = '1:4', lrb=False)
+    sw_print('1 2 3 4 10 11 12 13 14 ', nr=9, atype = '1:4', lrb=False,
+    color='ww')
 
